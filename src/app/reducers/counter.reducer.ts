@@ -12,6 +12,9 @@ const initialState: CounterState = {
 // cannot modify any arguments (state, or the action)
 export function reducer(currentState: CounterState = initialState, action: Action): CounterState {
   switch (action.type) {
+    case 'reset': {
+      return initialState
+    }
     case 'increment': {
       return {
         current: currentState.current + 1
