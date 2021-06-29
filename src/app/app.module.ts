@@ -18,6 +18,7 @@ import { CountByComponent } from './components/counter/count-by/count-by.compone
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './effects/app.effects';
 import { CounterEffects } from './effects/counter.effects';
+import { MusicModule } from './features/music/music.module';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,12 @@ import { CounterEffects } from './effects/counter.effects';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([AppEffects, CounterEffects])
+    EffectsModule.forRoot([AppEffects, CounterEffects]),
+    MusicModule,
+    AppRoutingModule,
   ],
   providers: [TodosDataService],
   bootstrap: [AppComponent]
