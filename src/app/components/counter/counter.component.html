@@ -1,4 +1,5 @@
 <button (click)="decrement()"
+        [disabled]="decrementDisabled$ | async"
         class="btn btn-primary">-</button>
 <span>{{current$ | async}}</span>
 <button (click)="increment()"
