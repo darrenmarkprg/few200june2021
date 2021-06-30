@@ -4,6 +4,8 @@ import { MusicComponent } from './music.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EntryComponent } from './components/entry/entry.component';
 import { ListComponent } from './components/list/list.component';
+import { StoreModule } from '@ngrx/store';
+import { featureName, reducers } from './reducers';
 
 const routes: Routes = [
   {
@@ -30,7 +32,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(featureName, reducers)
   ]
+  // exports: [ListComponent]
 })
 export class MusicModule { }
