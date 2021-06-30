@@ -15,3 +15,17 @@ export const loadSongsSucceeded = createAction(
 // failure
 
 // we will do an example of this with adding songs.
+
+
+// we need to add a song.
+
+export const songCreated = createAction(
+  '[music] song created',
+  props<{ payload: NewSongInfo }>()
+);
+
+interface NewSongInfo {
+  title: string;
+  artist: string;
+  album: string;
+}

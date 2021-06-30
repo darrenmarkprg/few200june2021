@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import { Store } from '@ngrx/store';
+import { MusicState } from '../../reducers';
+import { songCreated } from '../../actions/song.actions';
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
@@ -13,7 +15,10 @@ export class EntryComponent implements OnInit {
     artist: ['', [Validators.required]],
     album: ['', [Validators.required]]
   })
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<MusicState>
+  ) { }
 
   get title() { return this.form.get('title'); }
   get artist() { return this.form.get('artist'); }
@@ -24,15 +29,16 @@ export class EntryComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
+  submit(focusMe: HTMLInputElement) {
     if (this.form.invalid) {
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control?.markAsTouched({ onlySelf: true })
       });
     } else {
-      // WHAT???
-      console.log(this.form.value);
+      this.store.dispatch(songCreated({ payload: this.form.value }));
+      this.form.reset();
+      focusMe.focus(); // put the cursor there!
     }
   }
 }

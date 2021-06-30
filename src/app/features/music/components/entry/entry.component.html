@@ -1,10 +1,12 @@
 <form [formGroup]="form"
-      (ngSubmit)="submit()">
+      (ngSubmit)="submit(tacos)">
   <div class="form-group">
     <label for="title">Title</label>
     <input type="text"
            class="form-control"
            name="title"
+           #tacos
+           autofocus
            formControlName="title">
     <div class="alert alert-danger"
          *ngIf="title?.errors && (title?.touched || title?.dirty)">
