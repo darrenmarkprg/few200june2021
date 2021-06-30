@@ -2,7 +2,7 @@ import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, Action, on } from '@ngrx/store';
 import * as actions from '../actions/song.actions';
 export interface SongEntity {
-  id: string;
+  _id: string;
   title: string;
   artist: string;
   album: string;
@@ -12,7 +12,9 @@ export interface SongState extends EntityState<SongEntity> {
 
 }
 
-export const adapter = createEntityAdapter<SongEntity>();
+export const adapter = createEntityAdapter<SongEntity>({
+  selectId: e => e._id
+});
 
 const initialState = adapter.getInitialState();
 // const initialState: SongState = {

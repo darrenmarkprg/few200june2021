@@ -1,5 +1,7 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
 import { SongEntity } from "../reducers/songs.reducer";
 
 
@@ -8,10 +10,12 @@ export class SongsDataService {
 
   getSongs(): Observable<SongEntity[]> {
     // todo: ask the api for this.
-    return of([
-      { id: '1', title: 'Happy Birthday', artist: 'Unknown', album: 'Kids Songs' },
-      { id: '2', title: 'Carnage', artist: 'Nick Cave and Warren Ellis', album: 'Carnage' }
-    ])
+    return this.client.get<{ data: SongEntity[] }>('http://localhost:3000/songs').pipe(
+      map(response => response.data)
+    )
   }
+
+
+  constructor(private client: HttpClient) { }
 
 }
