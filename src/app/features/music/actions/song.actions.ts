@@ -24,6 +24,17 @@ export const songCreated = createAction(
   props<{ payload: NewSongInfo }>()
 );
 
+
+export const tempSongCreated = createAction(
+  '[music] temporary song created',
+  props<{ payload: SongEntity }>()
+);
+
+export const songAdded = createAction(
+  '[music] song add from api',
+  props<{ temporaryId: string, payload: SongEntity }>()
+);
+
 interface NewSongInfo {
   title: string;
   artist: string;
